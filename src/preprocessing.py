@@ -1,8 +1,19 @@
+"""
+Data preprocessing module.
+
+This module provides functions for various data preprocessing tasks including:
+- Data cleaning (removing/filling missing values, removing duplicates)
+- Numerical transformations (normalization, standardization, clipping, log transform)
+- Text processing (tokenization, punctuation removal, stopword removal)
+- Data structure operations (flattening, shuffling)
+"""
+
 import math
 import re
 import random
 
 import numpy as np
+
 
 def remove_missing_values(list_of_values):
     """
@@ -24,7 +35,15 @@ def remove_missing_values(list_of_values):
     [1, 2, 3]
     """
 
-    return list(filter(lambda x: (x is not None) and (x != '') and not (isinstance(x, float) and math.isnan(x)), list_of_values))
+    return list(
+        filter(
+            lambda x: (x is not None)
+            and (x != "")
+            and not (isinstance(x, float) and math.isnan(x)),
+            list_of_values,
+        )
+    )
+
 
 def fill_missing_values(list_of_values, fill_value=0):
     """
@@ -47,11 +66,16 @@ def fill_missing_values(list_of_values, fill_value=0):
     >>> fill_missing_values([1, None, 2, np.nan, '', 3], 100)
     [1, 100, 2, 100, 100, 3]
     """
-    
+
     return [
-        fill_value if (x is None or x == '' or (isinstance(x, float) and math.isnan(x))) else x
+        (
+            fill_value
+            if (x is None or x == "" or (isinstance(x, float) and math.isnan(x)))
+            else x
+        )
         for x in list_of_values
     ]
+
 
 def remove_duplicated_values(list_of_values):
     """
@@ -72,8 +96,9 @@ def remove_duplicated_values(list_of_values):
     >>> remove_duplicated_values([1, 1, 2, 2, 3, 3])
     [1, 2, 3]
     """
-    
+
     return list(dict.fromkeys(list_of_values))
+
 
 def normalize_min_max(values, new_min=0.0, new_max=1.0):
     """
@@ -104,6 +129,7 @@ def normalize_min_max(values, new_min=0.0, new_max=1.0):
         return [new_min] * len(arr)
     return list(((arr - min_val) / (max_val - min_val)) * (new_max - new_min) + new_min)
 
+
 def standardize_zscore(values):
     """
     Standardize numerical values using the z-score method.
@@ -129,6 +155,7 @@ def standardize_zscore(values):
         return [0.0] * len(arr)
     return list((arr - mean) / std)
 
+
 def clip_values(values, min_val, max_val):
     """
     Clip numerical values to a specified range.
@@ -153,6 +180,7 @@ def clip_values(values, min_val, max_val):
     [2, 5, 8]
     """
     return list(np.clip(values, min_val, max_val))
+
 
 def convert_to_integers(values):
     """
@@ -183,6 +211,7 @@ def convert_to_integers(values):
             continue
     return result
 
+
 def log_transform(values):
     """
     Apply logarithmic scale transformation to positive numerical values.
@@ -204,6 +233,7 @@ def log_transform(values):
     """
     return [math.log(x) for x in values if isinstance(x, (int, float)) and x > 0]
 
+
 def tokenize_text(text):
     """
     Tokenize text into lowercase alphanumeric words.
@@ -223,7 +253,8 @@ def tokenize_text(text):
     >>> tokenize_text("Hello, World! 123")
     ['hello', 'world', '123']
     """
-    return re.findall(r'\b[a-zA-Z0-9]+\b', text.lower())
+    return re.findall(r"\b[a-zA-Z0-9]+\b", text.lower())
+
 
 def keep_alphanumeric_and_spaces(text):
     """
@@ -244,7 +275,8 @@ def keep_alphanumeric_and_spaces(text):
     >>> keep_alphanumeric_and_spaces("Hello! World_123.")
     'Hello World123'
     """
-    return re.sub(r'[^A-Za-z0-9 ]+', '', text)
+    return re.sub(r"[^A-Za-z0-9 ]+", "", text)
+
 
 def remove_stopwords(text, stopwords):
     """
@@ -268,7 +300,8 @@ def remove_stopwords(text, stopwords):
     'this simple test'
     """
     words = text.lower().split()
-    return ' '.join([w for w in words if w not in stopwords])
+    return " ".join([w for w in words if w not in stopwords])
+
 
 def flatten_list(list_of_lists):
     """
@@ -290,6 +323,7 @@ def flatten_list(list_of_lists):
     [1, 2, 3, 4]
     """
     return [item for sublist in list_of_lists for item in sublist]
+
 
 def shuffle_list(values, seed=None):
     """
@@ -316,4 +350,3 @@ def shuffle_list(values, seed=None):
     shuffled = values[:]
     rng.shuffle(shuffled)
     return shuffled
-
