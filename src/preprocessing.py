@@ -123,6 +123,9 @@ def normalize_min_max(values, new_min=0.0, new_max=1.0):
     >>> normalize_min_max([1, 2, 3])
     [0.0, 0.5, 1.0]
     """
+    if new_min >= new_max:
+        raise ValueError(f"new_min ({new_min}) must be less than new_max ({new_max})")
+
     arr = np.array(values, dtype=float)
     min_val, max_val = np.min(arr), np.max(arr)
     if min_val == max_val:
