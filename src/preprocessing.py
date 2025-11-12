@@ -182,6 +182,8 @@ def clip_values(values, min_val, max_val):
     >>> clip_values([1, 5, 10], 2, 8)
     [2, 5, 8]
     """
+    if min_val >= max_val:
+        raise ValueError(f"min_val ({min_val}) must be less than max_val ({max_val})")
     return list(np.clip(values, min_val, max_val))
 
 
@@ -256,6 +258,8 @@ def tokenize_text(text):
     >>> tokenize_text("Hello, World! 123")
     ['hello', 'world', '123']
     """
+    if not isinstance(text, str):
+        raise TypeError(f"Expected str, got {type(text).__name__}")
     return re.findall(r"\b[a-zA-Z0-9]+\b", text.lower())
 
 
@@ -278,6 +282,8 @@ def keep_alphanumeric_and_spaces(text):
     >>> keep_alphanumeric_and_spaces("Hello! World_123.")
     'Hello World123'
     """
+    if not isinstance(text, str):
+        raise TypeError(f"Expected str, got {type(text).__name__}")
     return re.sub(r"[^A-Za-z0-9 ]+", "", text)
 
 
@@ -302,6 +308,8 @@ def remove_stopwords(text, stopwords):
     >>> remove_stopwords("this is a simple test", ["is", "a"])
     'this simple test'
     """
+    if not isinstance(text, str):
+        raise TypeError(f"Expected str, got {type(text).__name__}")
     words = text.lower().split()
     return " ".join([w for w in words if w not in stopwords])
 
@@ -312,8 +320,8 @@ def flatten_list(list_of_lists):
 
     Parameters
     ----------
-    list_of_lists : list of lists
-        A list containing sublists.
+    list_of_lists : list of lists or list
+        A list containing sublists or a flat list.
 
     Returns
     -------
@@ -324,8 +332,14 @@ def flatten_list(list_of_lists):
     --------
     >>> flatten_list([[1, 2], [3, 4]])
     [1, 2, 3, 4]
+    >>> flatten_list([1, 2, 3])
+    [1, 2, 3]
     """
-    return [item for sublist in list_of_lists for item in sublist]
+    return [
+        element 
+        for item in list_of_lists 
+        for element in (item if isinstance(item, list) else [item])
+    ]
 
 
 def shuffle_list(values, seed=None):
