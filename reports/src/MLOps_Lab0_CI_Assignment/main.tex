@@ -1,0 +1,213 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pifont}  % For sparkle symbols
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    commentstyle=\color{green!50!black},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    columns=flexible
+}
+
+\geometry{margin=2.5cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+% --------------------------------------------------------------
+%                         Title
+% --------------------------------------------------------------
+
+\begin{titlepage}
+    \centering
+    \vspace*{\fill}
+    {\LARGE MLOps\par}
+    {\LARGE Lab0\par}
+    \vspace{1cm}
+    {\LARGE Fundamentals of Continuous Integration \par}
+    \vspace{1cm}
+    {\large Iker Jauregui \par}
+    \vspace*{\fill}
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+In this report, we will see the logic behind the implemented unit and integration tests for the CI assignment (\href{https://github.com/Iker-Jauregui/MLPOps_Lab0}{link to GitHub repository}). These tests have two main purposes. On the one hand, they are meant to check if the implemented functionalities under \textit{cli.py} and \textit{preprocessing.py} modules (Figure \ref{fig:tree}) work correctly. On the other hand, they try to verify if the implementation of the code has taking into account rare or unexpected inputs or usages.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\linewidth]{figures/tree.png}
+    \caption{Project structure.}
+    \label{fig:tree}
+\end{figure}
+
+\section{Tests}
+
+\subsection{Unit Tests}
+
+This set of tests are included on the \textit{test\_logic.py} file and are related to the \textit{preprocessing.py} module functionality. This module implements a set of preprocessing tools for different types of input values, and it is the core of the project. So, the implemented unit tests are really exhaustive and aim to check not only the common and expected performance, but also rare cases.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/unit_test.png}
+    \caption{Implemented unit test for \textit{normalize\_min\_max} function.}
+    \label{fig:unit}
+\end{figure}
+
+If we take one of the unit tests as the one developed for \textit{normalize\_min\_max} function (Figure \ref{fig:unit}), we can notice the common testing template applied between all unit tests:
+
+\begin{itemize}
+    \item \textbf{Edge cases}: Empty list, single element, two elements.
+    \item \textbf{Order variations}: Ascending ($[1,2,3,4,5]$), descending ($[5,4,3,2,1]$), random order ($[1,5,4,2,3]$).
+    \item \textbf{Range configurations}: 
+    \begin{itemize}
+        \item Standard minimum and maximum: $[0, 1]$
+        \item Negative minimum: $[-1, 1]$
+        \item Both negative: $[-5, -1]$
+    \end{itemize}
+    \item \textbf{Input value diversity and data types}: 
+    \begin{itemize}
+        \item All positive (integer values): $[1,2,3,4,5]$
+        \item Mixed signs (float values): $[-5.0, 0.0, 5.0]$
+        \item All negative (float values): $[-15.0, -10.0, -5.0]$
+    \end{itemize}
+\end{itemize}
+
+\newpage
+\subsection{Integration Tests}
+
+This set of tests are included on the \textit{test\_cli.py} file and are related to the \textit{cli.py} module functionality. This module uses the \textit{preprocessing.py} module and builds a command line wrapper for each of the imported functions. So, this time, even if common use cases were covered, the developed integration tests were designed to test the interaction between the end user and the CLI interface, putting more effort on verifying that provided commands worked correctly with all kind of input values.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/integration_test.png}
+    \caption{Implemented integration tests for \textit{normalize} command.}
+    \label{fig:integration}
+\end{figure}
+
+If we look at the implementation of the integration tests of the \textit{normalize} command (Figure \ref{fig:integration}), we can see the shared testing structure between these type of tests:
+
+\begin{itemize}
+    \item \textbf{Successful executions}: The functions ended with \textit{\_exit\_ok} at its name test the normal use cases of the command.
+    \item \textbf{Erratic performance}: All erratic behavior is tested under the \textit{\_error} functions.
+\end{itemize}
+
+\newpage
+\section{Linting and Formatting Processes}
+
+Several linting and formatting steps were performed during the development of both source code and tests. Here is the output of the Linux terminal when executing one of those steps:
+
+\begin{lstlisting}[language=bash, caption={Pylint analysis before formatting}, label={lst:pylint-before}]
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint src/*.py
+************* Module src.cli
+src/cli.py:31:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:41:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:59:11: W0718: Catching too general exception Exception (broad-exception-caught)
+[... additional warnings ...]
+src/cli.py:24:0: C0411: standard import "json" should be placed before third party import "click" (wrong-import-order)
+************* Module src.__init__
+src/__init__.py:7:0: C0304: Final newline missing (missing-final-newline)
+************* Module src
+src/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module src.preprocessing
+src/preprocessing.py:27:0: C0301: Line too long (129/100) (line-too-long)
+src/preprocessing.py:50:0: C0303: Trailing whitespace (trailing-whitespace)
+src/preprocessing.py:75:0: C0303: Trailing whitespace (trailing-whitespace)
+src/preprocessing.py:319:0: C0305: Trailing newlines (trailing-newlines)
+src/preprocessing.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/preprocessing.py:5:0: E0401: Unable to import 'numpy' (import-error)
+
+------------------------------------------------------------------
+Your code has been rated at 8.32/10 (previous run: 8.32/10, +0.00)
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Black formatter execution}, label={lst:black}]
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run black src/*.py
+reformatted src/__init__.py
+reformatted src/preprocessing.py
+reformatted src/cli.py
+
+All done! @\textcolor{yellow}{\ding{72}}@   @\textcolor{yellow}{\ding{72}}@
+3 files reformatted.
+\end{lstlisting}
+
+\newpage
+\begin{lstlisting}[language=bash, caption={Pylint analysis after Black formatting}, label={lst:pylint-after-black}]
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint src/*.py
+************* Module src.cli
+src/cli.py:31:4: W0107: Unnecessary pass statement (unnecessary-pass)
+[... warnings ...]
+
+------------------------------------------------------------------
+Your code has been rated at 8.58/10 (previous run: 8.32/10, +0.26)
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Adding numpy dependency}, label={lst:uv-add}]
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv add numpy
+Resolved 22 packages in 305ms
+Installing wheels...
+warning: Failed to hardlink files; falling back to full copy.
+Installed 1 package in 1.69s
+ + numpy==2.3.4
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Final pylint analysis with improved score}, label={lst:pylint-final}]
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint src/*.py
+************* Module src.cli
+src/cli.py:31:4: W0107: Unnecessary pass statement (unnecessary-pass)
+[... remaining warnings ...]
+
+------------------------------------------------------------------
+Your code has been rated at 9.00/10 (previous run: 8.84/10, +0.16)
+\end{lstlisting}
+
+\section{Test Results and Coverage}
+
+\begin{lstlisting}[language=bash, caption={Final result summary after running \textit{uv run python -m pytest -v --cov=src}}, label={lst:pytest}]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.7-final-0 ________________
+
+Name                   Stmts   Miss  Cover
+------------------------------------------
+src/__init__.py            3      0   100%
+src/cli.py               177     30    83%
+src/preprocessing.py      62      5    92%
+------------------------------------------
+TOTAL                    242     35    86%
+======================= 236 passed, 10 warnings in 0.79s =======================
+\end{lstlisting}
+
+\section{Conclusions}
+
+The testing phase yielded successful results with all 236 tests passing and achieving 86\% overall code coverage. The \textit{preprocessing.py} module demonstrated robust implementation with 92\% coverage, while the \textit{cli.py} interface reached 83\% coverage through comprehensive integration tests.
+
+Future improvements could focus on increasing CLI coverage by testing additional edge cases in command parsing and enhancing error handling for specific exception types beyond the current broad exception catching pattern. Nonetheless, the current test suite provides a solid foundation for confident deployment and future feature development.
+
+\end{document}
