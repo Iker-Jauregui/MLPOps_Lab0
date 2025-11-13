@@ -123,6 +123,9 @@ def normalize_min_max(values, new_min=0.0, new_max=1.0):
     >>> normalize_min_max([1, 2, 3])
     [0.0, 0.5, 1.0]
     """
+    if not values:
+        return []
+
     if new_min >= new_max:
         raise ValueError(f"new_min ({new_min}) must be less than new_max ({new_max})")
 
@@ -182,7 +185,7 @@ def clip_values(values, min_val, max_val):
     >>> clip_values([1, 5, 10], 2, 8)
     [2, 5, 8]
     """
-    if min_val >= max_val:
+    if min_val > max_val:
         raise ValueError(f"min_val ({min_val}) must be less than max_val ({max_val})")
     return list(np.clip(values, min_val, max_val))
 
@@ -336,8 +339,8 @@ def flatten_list(list_of_lists):
     [1, 2, 3]
     """
     return [
-        element 
-        for item in list_of_lists 
+        element
+        for item in list_of_lists
         for element in (item if isinstance(item, list) else [item])
     ]
 
