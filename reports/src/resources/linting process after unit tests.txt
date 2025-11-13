@@ -1,0 +1,57 @@
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint src/*.py
+************* Module src.cli
+src/cli.py:31:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:42:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:60:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:82:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:101:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:113:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:137:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:156:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:181:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:200:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:219:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:231:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:246:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:262:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:286:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:298:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:322:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:341:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:360:11: W0718: Catching too general exception Exception (broad-exception-caught)
+************* Module src.preprocessing
+src/preprocessing.py:339:15: C0303: Trailing whitespace (trailing-whitespace)
+src/preprocessing.py:340:33: C0303: Trailing whitespace (trailing-whitespace)
+
+------------------------------------------------------------------
+Your code has been rated at 8.95/10 (previous run: 9.00/10, -0.05)
+
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run black src/*.py
+reformatted src/preprocessing.py
+
+All done! ✨   ✨
+1 file reformatted, 2 files left unchanged.
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint src/*.py
+************* Module src.cli
+src/cli.py:31:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:42:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:60:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:82:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:101:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:113:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:137:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:156:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:181:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:200:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:219:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:231:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:246:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:262:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:286:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:298:4: W0107: Unnecessary pass statement (unnecessary-pass)
+src/cli.py:322:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:341:11: W0718: Catching too general exception Exception (broad-exception-caught)
+src/cli.py:360:11: W0718: Catching too general exception Exception (broad-exception-caught)
+
+------------------------------------------------------------------
+Your code has been rated at 9.05/10 (previous run: 8.95/10, +0.10)

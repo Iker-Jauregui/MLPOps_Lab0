@@ -1,0 +1,62 @@
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint tests/*.py
+************* Module test_logic
+tests/test_logic.py:50:0: C0301: Line too long (104/100) (line-too-long)
+tests/test_logic.py:228:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:232:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:235:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:244:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:247:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:255:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:258:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:261:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_logic.py:264:0: C0304: Final newline missing (missing-final-newline)
+tests/test_logic.py:5:0: E0401: Unable to import 'src' (import-error)
+tests/test_logic.py:20:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:20:44: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+tests/test_logic.py:34:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:39:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:39:42: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+tests/test_logic.py:55:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:72:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:89:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:89:48: W0622: Redefining built-in 'min' (redefined-builtin)
+tests/test_logic.py:89:53: W0622: Redefining built-in 'max' (redefined-builtin)
+tests/test_logic.py:104:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:122:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:122:29: W0622: Redefining built-in 'min' (redefined-builtin)
+tests/test_logic.py:122:34: W0622: Redefining built-in 'max' (redefined-builtin)
+tests/test_logic.py:138:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:155:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:169:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:185:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:202:0: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_logic.py:220:0: C0116: Missing function or method docstring (missing-function-docstring)
+
+-----------------------------------
+Your code has been rated at 4.78/10
+
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint tests/*.py
+************* Module test_logic
+tests/test_logic.py:5:0: E0401: Unable to import 'src' (import-error)
+tests/test_logic.py:20:44: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+tests/test_logic.py:41:42: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+
+------------------------------------------------------------------
+Your code has been rated at 8.96/10 (previous run: 4.78/10, +4.18)
+
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint tests/*.py
+************* Module test_logic
+tests/test_logic.py:5:0: E0401: Unable to import 'src' (import-error)
+tests/test_logic.py:20:44: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+tests/test_logic.py:41:42: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+
+------------------------------------------------------------------
+Your code has been rated at 8.96/10 (previous run: 8.96/10, +0.00)
+
+(mlpops-lab0) alumno@eim-alu-83079:~/Desktop/datos/MLOps/Lab0/MLPOps_Lab0$ uv run python -m pylint tests/*.py
+************* Module test_logic
+tests/test_logic.py:20:44: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+tests/test_logic.py:41:42: W0621: Redefining name 'corrupted_string_list' from outer scope (line 11) (redefined-outer-name)
+
+------------------------------------------------------------------
+Your code has been rated at 9.70/10 (previous run: 8.96/10, +0.75)
